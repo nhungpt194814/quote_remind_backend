@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schema/user.schema';
+import { AuthModule } from 'src/auth/auth.module';
 
 // to declare mongoose for module
 @Module({
@@ -16,6 +17,8 @@ import { User, UserSchema } from './schema/user.schema';
         return schema;
       },
     },
-  ]),]
+  ]),
+  AuthModule  
+]
 })
 export class UserModule { }

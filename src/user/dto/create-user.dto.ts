@@ -1,27 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 // use to validate input data from user,form,..
 export class CreateUserDto {
+    @ApiProperty() // allow display in swagger
     @IsNotEmpty()
     @IsString()
-    @ApiProperty() // allow display in swagger
     username: string; 
-    
+
+    @ApiProperty() // allow display in swagger
     @IsNotEmpty()
     @IsString()
-    @ApiProperty() // allow display in swagger
     password: string;
     
+    @ApiProperty() // allow display in swagger
     @IsOptional()
     @IsString()
-    @ApiProperty() // allow display in swagger
     imgUrl: string;
     
+    @ApiProperty() // allow display in swagger
     @IsNotEmpty()
     @IsString()
     @IsEmail()
-    @ApiProperty() // allow display in swagger
     email: string;
     
     @IsNotEmpty()

@@ -5,11 +5,12 @@ import { AuthModule } from './auth/auth.module';
 import { MongooseModule} from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { QuoteModule } from './quote/quote.module';
 @Module({
   imports: [
     AuthModule,
     // to read environment variables
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({isGlobal: true}),
     // to connect to mongo
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -21,7 +22,8 @@ import { UserModule } from './user/user.module';
       }),
       inject: [ConfigService],
     }),
-    UserModule,],
+    UserModule,
+    QuoteModule,],
   controllers: [AppController],
   providers: [AppService],
 })
