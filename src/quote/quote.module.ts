@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { QuoteService } from './quote.service';
+import { QuoteService} from './quote.service';
 import { QuoteController } from './quote.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { QuoteSchema, Quote } from './schema/quote.schema';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
   controllers: [QuoteController],
@@ -16,6 +17,7 @@ import { QuoteSchema, Quote } from './schema/quote.schema';
       },
     },
   ]),
+  UserModule
 ]
 })
 export class QuoteModule {}

@@ -6,11 +6,26 @@ import { MongooseModule} from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { QuoteModule } from './quote/quote.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import * as Joi from '@hapi/joi';
+
 @Module({
   imports: [
+    // for cron job
+    ScheduleModule.forRoot(),
+
     AuthModule,
     // to read environment variables
-    ConfigModule.forRoot({isGlobal: true}),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      
+      // for mail
+      validationSchema: Joi.object({
+        EMAIL_SERVICE: Joi.string().required(),
+        EMAIL_USER: Joi.string().required(),
+        EMAIL_PASSWORD: Joi.string().required(),
+      })
+    }),
     // to connect to mongo
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -23,7 +38,8 @@ import { QuoteModule } from './quote/quote.module';
       inject: [ConfigService],
     }),
     UserModule,
-    QuoteModule,],
+    QuoteModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
