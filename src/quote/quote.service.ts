@@ -167,8 +167,8 @@ export class QuoteService implements OnModuleInit {
     });
   }
 
-  async findAll() {
-    return await this.model.find().exec();
+  async findAll(userId) {
+    return await this.model.find({userId: userId}).exec();
   }
 
   async findOne(id: string) {

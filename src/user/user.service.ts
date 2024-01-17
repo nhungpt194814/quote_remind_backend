@@ -25,11 +25,12 @@ export class UserService {
   }
 
   async logIn(loginDto: LoginDto){
+      console.log(loginDto)
       const user = await this.model.findOne({email: loginDto.email}).exec();
       if(user==null){
         return "this email does not exist";
       }
-
+      
       const check = await comparePassword(loginDto.password, user.password);
       if(check==false){
         return "password wrong"
@@ -41,7 +42,8 @@ export class UserService {
         }
         // create token
         const accessToken = await this.authService.generateJwt(payload);
-        return accessToken;
+        const userId = user.id
+        return {accessToken, userId};
       }
     
   }

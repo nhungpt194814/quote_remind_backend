@@ -24,16 +24,4 @@ export class AuthService {
     }
     return decoded;
   }
-
-  // decodeOtpJwt(token: string): any {
-  //   let decoded;
-  //   try {
-  //     decoded = this.jwtService.verify(token, {
-  //       secret: this.configService.get<string>('OTP_KEY'),
-  //     });
-  //   } catch (e) {
-  //     throw new UnauthorizedException();
-  //   }
-  //   return decoded;
-  // }
 }

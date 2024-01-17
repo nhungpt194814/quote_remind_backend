@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { QuoteService} from './quote.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { UpdateQuoteDto } from './dto/update-quote.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UserIdQuery } from './dto/query.dto';
+
 
 @ApiTags('quote')
 @Controller('quote')
@@ -14,9 +16,13 @@ export class QuoteController {
     return this.quoteService.create(createQuoteDto);
   }
 
-  @Get()
-  async findAll() {
-    return await this.quoteService.findAll();
+  // @Get()
+  // async findAll() {
+  //   return await this.quoteService.findAll();
+  // }
+  @Get('userId')
+  async findAll(@Query() userId: UserIdQuery) {
+    return await this.quoteService.findAll(userId.userId);
   }
 
   @Get(':id')
